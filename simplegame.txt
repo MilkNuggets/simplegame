@@ -1,0 +1,203 @@
+#include <iostream>
+#include <string>
+#include <chrono>
+#include <windows.h>
+using namespace std;
+
+
+
+int att, hp, pot, potions, ehp, att1, def, edef, epotions, epot, att2, dif, level, x;
+void enemy();
+
+
+int main() {
+	void menu();
+	void run();
+	void difficulty();
+	difficulty();
+
+}
+
+void difficulty() {
+	void run();
+	system("cls");
+	x = 10;
+	level = 1;
+	cout << "(1) Easy,  (2) Medium,  (3) Hard\n";
+	cout << "Enter Difficulty Level: ";
+	cin >> dif;
+	x /= dif;
+	run();
+}
+
+
+void run() {
+	void menu();
+	system("cls");
+		potions = 3;
+		ehp = 10;
+		epotions = 3;
+		hp = x;
+	 menu();
+}
+
+void menu() {
+	if (hp <= 0) {
+		cout << "\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t GAME OVER";
+		level = 0;
+		cin.ignore();
+		cin.get();
+		difficulty();
+	}
+
+	if (ehp <= 0) {
+		cout << "\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t YOU WIN!";
+		level += 1;
+		ehp = 10;
+		cin.ignore();
+		cin.get();
+		run();
+	}
+	void enemy();
+	void attack();
+	void heal();
+	void defend();
+	void attacked();
+	void attack2();
+	void eheal();
+	void edefend();
+	string output;
+	int att, choice, att1, def, att2;
+	choice = 0;
+	cout << "\n\n\t\t\t A Challenger approaches!\t\t\t" << "Level: " << level << "\t\t\tDifficulty: " << dif <<"\n";
+	cout << "------------------------------------------------------------------------------------------------------------------------\n";
+	cout << "\t\t\t Enemy HP: " << ehp << "                   |             Player Health: " << hp;
+	cout << "\n\t\t\t Enemy Potions: " << epotions << "               |             " << "Player Potions: " << potions << "\n";
+	cout << "------------------------------------------------------------------------------------------------------------------------\n";
+	cout << "\n\n\n\t\t\t(1) Attack, (2) Defend, (3) Heal";
+	cout << "\n\n\t\t\t" << output;
+	cout << "\n\n\n\n\n\n\n\n\t\t\t Choice: ";
+	cin >> choice;
+	cout << "\n\n\n";
+
+		if (choice == 1) {
+			attack();
+		}
+		else if (choice == 2) {
+			defend();
+		}
+
+		else if (choice == 3) {
+			heal();
+		}
+	
+		else { menu(); }
+	
+
+}
+
+
+
+
+	void attacked() {
+		if (ehp <= 0) { menu(); }
+		else {
+			att = (rand() % 4 + 1) * -1;
+			hp += att;
+			cout << "Enemy has hit you for " << att << " hearts!\n";
+			Sleep(1000);
+			menu();
+		}
+
+	}
+
+	void attack() {
+		att1 = (rand() % 4+1)*-1;
+		ehp += att1;
+		cout << "You dealt " << att1 << " points of dammage!\n";
+		Sleep(1000);
+		enemy();
+	}
+
+	void defend() {
+		def = (rand() % 3);
+		cout << "You blocked " << def << " points of dammage!\n";
+		hp += def;
+		Sleep(1000);
+		attacked();
+	}
+
+	void heal() {
+		if (potions <= 0) { cout << "You are out of potions!\n"; menu(); }
+		else {
+		pot = rand() % 4+1;
+		potions -= 1;
+		hp += pot;
+		cout << "You healed " << pot << " points!\n";
+		Sleep(1000);
+		enemy();
+	}
+
+	}
+
+	
+
+	void attack2() {
+		att2 = (rand() % 4 + 1) * -1;
+		ehp += att2;
+		cout << "You dealt " << att2 << " points of dammage!\n";
+		Sleep(1000);
+		menu();
+
+
+	}
+				
+				
+				
+			void edefend() {
+				if (ehp <= 0) { menu(); }
+				else {
+					edef = (rand() % 3);
+					cout << "Enemy blocked " << edef << " points of dammage!\n";
+					ehp += edef;
+					Sleep(1000);
+					attack2();
+				}
+				}
+
+				void eheal() {
+					if (epotions <= 0) { cout << "Enemy is out of potions!\n"; Sleep(1000); enemy(); }
+						else if (ehp <= 0){
+						menu();
+					}
+						else {
+							epot = rand() % 4 + 1;
+							epotions -= 1;
+							ehp += epot;
+							cout << "Enemy healed " << epot << " points!\n";
+							Sleep(1000);
+							menu();
+					}
+	
+	}
+
+				
+				void enemy() {
+					int r;
+					r = rand() % 3 + 1;
+
+					switch (r) {
+					case 1:
+						edefend();
+						break;
+					case 2:
+						eheal();
+						break;
+					case 3:
+						attacked();
+						break;
+
+					}
+				}
+
+				
